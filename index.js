@@ -6,7 +6,8 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 //TO RENDER THE CSS AND IMAGES
-app.use(express.static("public"));
+// app.use(express.static("public"));
+app.use(express.static(__dirname + "/public/"));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/signup.html");
