@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
 const app = express();
-
+require("dotenv").config();
 app.use(bodyParser.urlencoded({ extended: true }));
 //TO RENDER THE CSS AND IMAGES
 // app.use(express.static("public"));
@@ -34,14 +34,14 @@ app.post("/", (req, res) => {
   const jsonData = JSON.stringify(data);
 
   const url = "https://us12.api.mailchimp.com/3.0/lists/6f904d797e";
-
   const option = {
     method: "post",
-    auth: "sayantan615:6ca2b57063576166cc07cea616b74fa0-us12",
+    auth: `sayantan615:${process.env.API_KEY}`,
   };
 
   const request = https.request(url, option, (response) => {
-    console.log(response.statusCode)
+    console.log(option);
+    console.log(response.statusCode);
     if (response.statusCode === 200) {
       res.sendFile(__dirname + "/success.html");
     } else {
